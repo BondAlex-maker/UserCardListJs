@@ -13,8 +13,81 @@
 
 
 
+
 </ul>
 
-<script src="./assets/js/index.js"></script>
+<script>
+    'use strict';
+    const SOCIAL_NETWORKS = Object.freeze({
+
+        FACEBOOK: "FACEBOOK",
+        TWITTER: "TWITTER",
+        SKYPE: "SKYPE",
+        GOOGLE_PLUS: "GOOGLE_PLUS",
+
+    });
+
+    const users = [
+        {
+            id : 1,
+            imageSrc: "https://24smi.org/public/media/celebrity/2019/01/29/eblteapobq9j-stas-mikhailov.jpg",
+            name: "Alex",
+            surname: "Mathew",
+            description: "extremely large text ...",
+            contacts: [
+                {
+                    name: SOCIAL_NETWORKS.FACEBOOK,
+                    href: "#",
+                }, {
+                    name: SOCIAL_NETWORKS.TWITTER,
+                    href: "#",
+                }, {
+                    name: SOCIAL_NETWORKS.SKYPE,
+                    href: "#",
+                },
+
+            ],
+
+        },
+
+    ];
+
+    const userListElem = document.getElementById("usersList");
+    userListElem.classList.add('flexContainer', 'flexWrap', 'justifyContentEvenly');
+    function createUserListItemElem(user) {
+        const userListItemElem = document.createElement("li");
+        const userCardWrapperElem = document.createElement("div");
+        userCardWrapperElem.classList.add('userCardWrapper', 'flexContainer', 'flexDirectionColumn', 'alignItemCenter');
+        const userPictureContainerElem = document.createElement("div");
+        userPictureContainerElem.classList.add("userPictureContainer");
+
+        const userPictureElem = document.createElement("img");
+        userPictureElem.setAttribute('src', user.imageSrc ? user.imageSrc : "./assets/icons/user_icon.png");
+        userPictureElem.setAttribute('alt', 'user picture');
+
+        userPictureContainerElem.append(userPictureElem);
+
+        const userFullNameElem = document.createElement('h3');
+
+        userFullNameElem.innerText = `${user.name} ${user.surname}`;
+        const userContactsContainerElem = document.createElement("div");
+        userContactsContainerElem.classList.add('userContactsContainer');
+        userContactsLinkElem.createElement('a');
+        userContactsLinkElem.setAttribute('href', user.href)
+
+
+        userCardWrapperElem.append(userPictureContainerElem);
+        userCardWrapperElem.append(userFullNameElem);
+        userListItemElem.append(userCardWrapperElem);
+
+        return userListItemElem;
+
+
+
+    }
+
+
+
+</script>
 </body>
 </html>
