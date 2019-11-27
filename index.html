@@ -16,7 +16,7 @@
 
 </ul>
 
-<script>
+<script type="text/javascript">
     'use strict';
     const SOCIAL_NETWORKS = Object.freeze({
 
@@ -54,8 +54,10 @@
 
     const userListElem = document.getElementById("usersList");
     userListElem.classList.add('flexContainer', 'flexWrap', 'justifyContentEvenly');
+
+        createUserListItemElem();
     function createUserListItemElem(user) {
-        const userListItemElem = document.createElement("li");
+        const userListItemElem = document.createElement('li');
         const userCardWrapperElem = document.createElement("div");
         userCardWrapperElem.classList.add('userCardWrapper', 'flexContainer', 'flexDirectionColumn', 'alignItemCenter');
         const userPictureContainerElem = document.createElement("div");
@@ -65,24 +67,29 @@
         userPictureElem.setAttribute('src', user.imageSrc ? user.imageSrc : "./assets/icons/user_icon.png");
         userPictureElem.setAttribute('alt', 'user picture');
 
+        userPictureContainerElem.append(userPictureElem);
+
         const userFullNameElem = document.createElement('h3');
+        userFullNameElem.classList.add('userFullName', 'userFullMargin');
 
         userFullNameElem.innerText = `${user.name} ${user.surname}`;
 
 
         const userDescriptionElem = document.createElement('p');
+        userDescriptionElem.classList.add('upperDescription');
         userDescriptionElem.innerText = `${user.description}`;
 
 
         const userContactsContainerElem = document.createElement("div");
         userContactsContainerElem.classList.add('userContactsContainer');
 
-        userContactsLinkElem.createElement('img');
-        userContactsLinkElem.setAttribute('src', user.iconSrc : './assets/icons/socialNetworks/facebook.png');
-        userContactsLinkElem.setAttribute('href', user.href);
+        const userContactsLinkElem = document.createElement('img');
+        userContactsLinkElem.setAttribute('src', user.contacts.name);
+        userContactsLinkElem.setAttribute('href', user.contacts.href);
 
 
-        userPictureContainerElem.append(userPictureElem);
+
+
 
 
 
