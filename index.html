@@ -55,58 +55,86 @@
     const userListElem = document.getElementById("usersList");
     userListElem.classList.add('flexContainer', 'flexWrap', 'justifyContentEvenly');
 
-        createUserListItemElem();
+    appendUsersListItems(userListElem, users);
+
+
+    function appendUsersListItems(usersListElem, users) {
+        users.forEach(
+            user => {
+            usersListElem.append(createUserListItemElem(user));
+        }
+    );
+    }
+
     function createUserListItemElem(user) {
         const userListItemElem = document.createElement('li');
+        userListItemElem.append( createUserCardElem(user) );
+
+        return userListItemElem;
+    }
+
+    function createUserCardElem(user) {
         const userCardWrapperElem = document.createElement("div");
         userCardWrapperElem.classList.add('userCardWrapper', 'flexContainer', 'flexDirectionColumn', 'alignItemCenter');
+        userCardWrapperElem.append(createUserPictureElem(user));
+        userCardWrapperElem.append(createUserFullNameElem(user));
+        userCardWrapperElem.append(createUserDescriptionElem(user));
+        userCardWrapperElem.append(createUserContactsContainerElem(user));
+        return userCardWrapperElem;
+
+
+    }
+    function createUserPictureElem(user) {
         const userPictureContainerElem = document.createElement("div");
         userPictureContainerElem.classList.add("userPictureContainer");
+        userPictureContainerElem.append(getUserPictureElem(user));
 
+        return userPictureContainerElem;
+
+    }
+
+    function getUserPictureElem({imageSrc}) {
         const userPictureElem = document.createElement("img");
         userPictureElem.setAttribute('src', user.imageSrc ? user.imageSrc : "./assets/icons/user_icon.png");
         userPictureElem.setAttribute('alt', 'user picture');
 
-        userPictureContainerElem.append(userPictureElem);
+        return  userPictureElem;
+    }
 
+    function createUserFullNameElem({name, surname}) {
         const userFullNameElem = document.createElement('h3');
         userFullNameElem.classList.add('userFullName', 'userFullMargin');
-
         userFullNameElem.innerText = `${user.name} ${user.surname}`;
 
+        return userFullNameElem;
+    }
 
+
+    function createUserDescriptionElem(user) {
         const userDescriptionElem = document.createElement('p');
         userDescriptionElem.classList.add('upperDescription');
         userDescriptionElem.innerText = `${user.description}`;
 
-
-        const userContactsContainerElem = document.createElement("div");
-        userContactsContainerElem.classList.add('userContactsContainer');
-
-        const userContactsLinkElem = document.createElement('img');
-        userContactsLinkElem.setAttribute('src', user.contacts.name);
-        userContactsLinkElem.setAttribute('href', user.contacts.href);
-
-
-
-
-
-
-
-
-        userContactsContainerElem.append(userContactsLinkElem);
-
-        userCardWrapperElem.append(userPictureContainerElem);
-        userCardWrapperElem.append(userFullNameElem);
-        userCardWrapperElem.append(userDescriptionElem);
-        userCardWrapperElem.append(userContactsContainerElem);
-        userListItemElem.append(userCardWrapperElem);
-
-        return userListItemElem;
-
-
+        return userDescriptionElem;
 
     }
+
+        function createUserContactsContainerElem(user) {
+            const userContactsContainerElem = document.createElement("div");
+            userContactsContainerElem.classList.add('userContactsContainer');
+
+            userContactsContainerElem.append(createUserContactsLinkElem(user));
+            return userContactsContainerElem;
+
+        }
+        function createUserContactsLinkElem(user) {
+            const userContactsLinkElem = document.createElement('img');
+            userContactsLinkElem.setAttribute('src', user.contacts.name);
+            userContactsLinkElem.setAttribute('href', user.contacts.href);
+
+            return userContactsLinkElem;
+
+        }
 
 
 
